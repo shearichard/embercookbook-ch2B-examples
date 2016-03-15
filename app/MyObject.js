@@ -19,11 +19,13 @@ export default function() {
             console.log('IN ISONCHANGED: isOn value changed');
         })
     });
+
     Light.reopen({
         isAnythingChanged: Ember.observer('isOn','color',function() {
             console.log('IN ISANYTHINGCHANGED: isOn or color value changed');
         })
     });
+
     //The next two observers are arranged in such a way that when `isOn` changes
     //the `checkChanged` handler is only called once (rather then twic which is what
     //would otherwise happen
@@ -35,6 +37,8 @@ export default function() {
             console.log('IN CHECKCHANGED:' + this.get('description'));
         })
     });
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
     console.log("--> About to instantiate Light");
     const bulb = Light.create({age: 22});
     console.log("--> About to set 'isOn' to true");
