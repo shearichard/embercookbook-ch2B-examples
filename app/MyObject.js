@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default function() {
     const Light = Ember.Object.extend({
         init(){
-            alert('The isON property is defaulted to ' + this.get('isOn'));
+            console.log('The isON property is defaulted to ' + this.get('isOn'));
         },
         isOn: false,
         color: 'yellow',
@@ -19,8 +19,12 @@ export default function() {
             console.log('isOn value changed');
         })
     });
+    Light.reopen({
+        isAnythingChanged: Ember.observer('isOn','color',function() {
+            console.log('isOn or color value changed');
+        })
+    });
     const bulb = Light.create({age: 22});
     bulb.set('isOn',true);
-    bulb.set('isOn',false);
-    bulb.set('isOn',true);
+    bulb.set('color', 'blue');
 }
